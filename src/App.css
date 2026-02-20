@@ -11,10 +11,13 @@ body {
 .App {
   width: 100vw;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* Left sidebar */
 .left-sidebar {
   width: 30%;
+  position: relative;
 }
 .left-sidebar .logo {
   height: 110px;
@@ -33,7 +36,7 @@ body {
   height: calc(100vh - 110px - 20px);
 }
 .note-item {
-  padding: 10px;
+  padding: 10px 30px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -42,6 +45,10 @@ body {
 }
 .notes-list .note-item:hover {
   background-color: rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+}
+.note-item.active {
+  background-color: rgba(47, 47, 47, 0.3);
   border-radius: 15px;
 }
 .notes-initials {
@@ -54,12 +61,123 @@ body {
   color: #fff;
   font-size: 24px;
 }
+.add-btn {
+  position: absolute;
+  right: 35px;
+  bottom: 35px;
+  background-color: #16008b;
+  width: 93px;
+  height: 93px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+}
+
+.open-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(47, 47, 47, 0.85);
+}
+
+.modal {
+  background: white;
+  padding: 30px 40px;
+  width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.modal h2 {
+  margin-bottom: 25px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+label {
+  width: 120px;
+  font-weight: 600;
+}
+
+input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 20px;
+}
+
+.colors {
+  display: flex;
+  gap: 15px;
+}
+
+.color-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+.color-circle.selected {
+  border: 3px solid #cecece;
+  box-shadow: 0 0 0 3px white;
+  transform: scale(1.1);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.actions button {
+  border: none;
+  outline: none;
+}
+
+.create-btn {
+  background: #142b8c;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
 /* main content */
 .main-content {
   width: 70%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #dae5f5;
 }
 .header {
   width: 100%;
@@ -78,7 +196,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: #dae5f5;
+  /* background-color: #dae5f5; */
 }
 .note {
   padding: 20px;
@@ -134,4 +252,16 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+.send-icon {
+  fill: #001f8b;
+  transition: fill 0.2s ease;
+}
+
+.send-btn:disabled .send-icon {
+  fill: #ababab;
+}
+
+.send-btn:disabled {
+  cursor: not-allowed;
 }
