@@ -32,8 +32,12 @@ body {
 }
 .notes-list {
   margin-top: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: calc(100vh - 110px - 20px);
+}
+.notes-list .note-item:hover {
+  background-color: rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
 }
 .note-item {
   padding: 10px 30px;
@@ -42,10 +46,6 @@ body {
   align-items: center;
   gap: 25px;
   cursor: pointer;
-}
-.notes-list .note-item:hover {
-  background-color: rgba(47, 47, 47, 0.2);
-  border-radius: 15px;
 }
 .note-item.active {
   background-color: rgba(47, 47, 47, 0.3);
@@ -60,14 +60,15 @@ body {
   align-items: center;
   color: #fff;
   font-size: 24px;
+  flex-shrink: 0;
 }
 .add-btn {
   position: absolute;
   right: 35px;
   bottom: 35px;
   background-color: #16008b;
-  width: 93px;
-  height: 93px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -94,8 +95,7 @@ body {
 
 .modal {
   background: white;
-  padding: 30px 40px;
-  width: 600px;
+  padding: 30px;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -116,7 +116,6 @@ label {
 }
 
 input {
-  flex: 1;
   padding: 10px 15px;
   border-radius: 20px;
   border: 1px solid #ccc;
@@ -179,6 +178,18 @@ input {
   flex-direction: column;
   background-color: #dae5f5;
 }
+
+.welcome-page {
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dae5f5;
+  position: relative;
+}
+
 .header {
   width: 100%;
   height: 10vh;
@@ -189,14 +200,16 @@ input {
   background-color: #001f8b;
   color: #fff;
 }
+.left-arrow-icon {
+  display: none;
+}
 .group-notes {
   padding: 20px 40px;
   height: 65vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* background-color: #dae5f5; */
 }
 .note {
   padding: 20px;
@@ -247,7 +260,7 @@ input {
   position: absolute;
   right: 40px;
   bottom: 30px;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: #fff;
   border: none;
   border-radius: 5px;
@@ -264,4 +277,122 @@ input {
 
 .send-btn:disabled {
   cursor: not-allowed;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #d9d9d9;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 8px;
+  background: #fff;
+  border-radius: 4.5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d9d9d9;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .left-sidebar {
+    width: 40%;
+  }
+  .main-content {
+    width: 60%;
+  }
+  .add-btn {
+    width: 80px;
+    height: 80px;
+    bottom: 25px;
+    right: 25px;
+  }
+  .group-notes {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    flex-direction: column;
+    height: 100vh;
+  }
+  .left-sidebar {
+    width: 100%;
+    height: 100vh;
+    display: block;
+  }
+  .notes-initials {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .main-content,
+  .welcome-page {
+    display: none;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .left-arrow-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    margin-right: 12px;
+    cursor: pointer;
+  }
+
+  .App.note-open .left-sidebar {
+    display: none;
+  }
+  .App.note-open .main-content,
+  .App.note-open .welcome-page {
+    display: flex;
+  }
+  .modal-overlay {
+    padding: 20px;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+  }
+
+  .colors {
+    gap: 10px;
+  }
+  label {
+    width: 100px;
+    font-size: 14px;
+  }
+
+  .color-circle {
+    width: 20px;
+    height: 20px;
+  }
+
+  input {
+    font-size: 14px;
+    outline: none;
+  }
+  .modal {
+    width: 90%;
+    padding: 20px;
+  }
+  .input-area {
+    padding: 20px;
+  }
+  .note-item {
+    gap: 15px;
+  }
+  .note-item h2 {
+    font-size: 20px;
+  }
+  .header {
+    padding: 15px;
+    gap: 15px;
+  }
 }
