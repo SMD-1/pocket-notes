@@ -108,7 +108,7 @@ function App() {
               onClick={() => setSelectedNote(note)}
             >
               <div
-                className="notes-initials"
+                className="note-initials"
                 style={{ backgroundColor: note.backgroundColor }}
               >
                 {note.title
@@ -206,7 +206,7 @@ function App() {
               </svg>
             </button>
             <div
-              className="notes-initials"
+              className="note-initials"
               style={{ backgroundColor: selectedNote?.backgroundColor }}
             >
               {selectedNote?.title
@@ -283,7 +283,7 @@ function App() {
               src="src/assets/hero_background.svg"
               style={{ width: "90%" }}
             />
-            <h2 style={{ marginBottom: "10px" }}>Pocket Notes</h2>
+            <h1 style={{ marginBottom: "10px" }}>Pocket Notes</h1>
             <p className="welcome-message">
               Send and receive messages without keeping your phone online.
               <br /> Use Pocket Notes on up to 4 linked devices and 1 mobile
