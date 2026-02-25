@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import welcomeBg from "./assets/hero_background.svg";
 import "./App.css";
 
 function App() {
@@ -280,7 +281,7 @@ function App() {
           >
             <img
               alt="welcome background"
-              src="src/assets/hero_background.svg"
+              src={welcomeBg}
               style={{ width: "90%" }}
             />
             <h1 style={{ marginBottom: "10px" }}>Pocket Notes</h1>
