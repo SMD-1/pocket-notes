@@ -1,9 +1,41 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import welcomeBg from "../assets/hero_background.svg";
 
+// helper functions moved outside component to avoid logic in render
+const formatDate = (date) =>
+  date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
+const formatTime = (date) =>
+  date
+    .toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .toUpperCase();
+
+const computeInitials = (title = "") =>
+  title
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+
 const MainContent = ({ notes, setNotes, selectedNote, setSelectedNote }) => {
   const [userInput, setUserInput] = useState("");
+
+  // memoize derived data so the render block stays declarative
+  const initials = useMemo(
+    () => computeInitials(selectedNote?.title),
+    [selectedNote?.title],
+  );
 
   // Send button function
   const handleSend = (id) => {
@@ -15,16 +47,8 @@ const MainContent = ({ notes, setNotes, selectedNote, setSelectedNote }) => {
     const newContent = {
       id: selectedNote.content.length + 1,
       text: userInput,
-      date: currentDate.toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      }),
-      time: currentDate.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      }),
+      date: formatDate(currentDate),
+      time: formatTime(currentDate),
     };
     const updatedNotes = notes.map((note) => {
       if (note.id === id) {
@@ -71,13 +95,7 @@ const MainContent = ({ notes, setNotes, selectedNote, setSelectedNote }) => {
               className="note-initials"
               style={{ backgroundColor: selectedNote?.backgroundColor }}
             >
-              {selectedNote?.title
-                .trim()
-                .split(/\s+/)
-                .slice(0, 2)
-                .map((word) => word[0])
-                .join("")
-                .toUpperCase()}
+              {initials}
             </div>
             <h2>{selectedNote?.title}</h2>
           </div>
